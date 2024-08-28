@@ -2,5 +2,11 @@
 =INDEX($B$1:$D$1; MOD(LIGNE(A1)-1; NBVAL($B$1:$D$1))+1)
 =INDEX($B$2:$D$4; EQUIV(F2; $A$2:$A$4; 0); EQUIV(G2; $B$1:$D$1; 0))
 
+Generique :
+
+=INDEX($A$2:$A$1000; ENT((LIGNE(A1)-1)/NBVAL($B$1:$Z$1))+1)
+=INDEX($B$1:$Z$1; MOD(LIGNE(A1)-2; NBVAL($B$1:$Z$1))+1)
+=INDEX(DECALER($B$2; 0; 0; NBVAL($A$2:$A$1000); NBVAL($B$1:$Z$1)); EQUIV(F2; $A$2:$A$1000; 0); EQUIV(G2; $B$1:$Z$1; 0))
+
 
 
