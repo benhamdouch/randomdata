@@ -1,3 +1,4 @@
 =INDEX($A$2:$A$4; ENT((LIGNE(A1)-1)/NBVAL($B$1:$D$1))+1)
 =INDEX($B$1:$D$1; MOD(LIGNE(A1)-1; NBVAL($B$1:$D$1))+1)
-=INDEX($B$2:$D$4; EQUIV(F2; $A$2:$A$4; 0); EQUIV(G2; $B$1:$D$1; 0))
+=INDEX($B$1:$D$1; MOD(LIGNE(A1)-1; NBVAL($B$1:$D$1))+1)
+
