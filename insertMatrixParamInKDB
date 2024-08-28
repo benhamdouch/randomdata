@@ -1,0 +1,29 @@
+from qpython import qconnection
+from qpython.qcollection import QDictionary
+from qpython.qtype import QKeyword
+
+# Connect to the KDB+ instance
+q = qconnection.QConnection(host='localhost', port=5000)
+q.open()
+
+# Define the data to insert
+data = {
+    'time': [q('2024.08.28T10:00:00.000'), q('2024.08.28T11:00:00.000')],
+    'sym': ['AAPL', 'GOOGL'],
+    'iSym': ['MSFT', 'TSLA'],
+    'jSym': ['AMZN', 'NFLX'],
+    'val': [150.25, 245.75],
+    'who': ['TraderA', 'TraderB']
+}
+
+# Convert the Python dictionary to QDictionary
+data_to_insert = QDictionary(list(data.keys()), list(data.values()))
+
+# Insert data into the 'algoInMatrixDetails' table
+q.sync('insert', QKeyword('algoInMatrixDetails'), data_to_insert)
+
+# Verify the data was inserted
+print(q.sync('select from algoInMatrixDetails'))
+
+# Close the connection
+q.close()
