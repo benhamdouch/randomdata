@@ -10,4 +10,5 @@ Generique :
 
 
 
-hi SAra
+find /path/to/search -type d -writable
+
