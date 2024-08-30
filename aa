@@ -1,0 +1,11 @@
+Python:
+(No update mentioned)
+JAVA:
+
+Ya: Execution-libfirst version pushed, dependency on ird-lib as the first step. Fa will take a look at it.
+Ya: Still following the migration of Red Hat.
+Yo: Java 21 migration in progress; possibility of having a global variable or symlink to the current version to ease the next migrations.
+KDB:
+J:
+
+Working on data remediation, having a look at the options for Panopticon config, discussion ongoing for setting accounts passwords.
