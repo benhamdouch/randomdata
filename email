@@ -1,0 +1,42 @@
+Hi Team,
+
+I wanted to summarize the key decisions and action items we discussed during our recent meeting on coding practices. Please review the following points and take note of the action items relevant to you:
+
+1. Python Coding Standards
+
+PEP 8 Compliance:
+We will be implementing automated checks using Git hooks or SonarQube to ensure all code follows PEP 8 standards.
+Action: A ticket will be created to set up these tools.
+2. Branching Strategy
+
+Main Branch Protection:
+We will protect the main branches from direct commits to maintain code stability.
+Adoption of Git Flow:
+Git Flow will be adopted for both Java and Python projects to manage our branches more effectively.
+Action: A ticket will be created to analyze and implement Git Flow.
+Local Development Practices:
+Developers are encouraged to use rebase or merge for integrating changes from the master branch into their local branches.
+3. Commit Messages
+
+Consistency and Traceability:
+Please include ticket numbers in all commit messages and branch names to ensure traceability, aligning with our Jira and GitLab integrations.
+4. Code Reviews
+
+Review Process Improvements:
+Merges will be blocked if the CI pipeline is not green. This will be configured in GitLab.
+All merge requests must be approved before merging, with one MR per ticket.
+Commit messages should be clear and concise.
+Short and focused MRs are encouraged to simplify the review process.
+Code reviews will be conducted on the develop branch in line with the Git Flow strategy.
+5. Testing
+
+Testing Standards:
+We will follow the AAA pattern (Arrange, Act, Assert) in our tests to ensure clarity and consistency.
+Java CI/CD Enhancement:
+We will automate version bumps in all algorithm repositories as part of the CI/CD pipeline.
+Action: A workshop will be organized for the Java team to cover these enhancements.
+6. Deployment to PROD/PREPROD
+
+Pre-production Deployment:
+Deployments to pre-production will occur once a merge request is approved and merged to master (or develop).
+Future Consideration: We will explore the possibility of auto-deployment to Nexus on the master branch.
