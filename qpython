@@ -1,0 +1,26 @@
+from qpython import qconnection
+from qpython.qtype import QTemporal, QSymbol
+
+# Connect to the Kdb+ instance
+q = qconnection.QConnection(host='localhost', port=5000)
+q.open()
+
+# Create a table in Kdb+ if it doesn't exist (just for this example)
+q.sendSync('trades:([] timestamp: (); symbol: `symbol$(); price: ())')
+
+# Prepare the data to insert
+from datetime import datetime
+
+timestamp = QTemporal(datetime.now())  # current timestamp in Kdb+ format
+symbol = QSymbol('AAPL')               # example stock symbol
+price = 150.25                         # example trade price
+
+# Insert the row into the table
+q.sync('insert', 'trades', [timestamp, symbol, price])
+
+# Confirm the data has been inserted by querying the table
+result = q.sendSync('select from trades')
+print(result)
+
+# Close the connection
+q.close()
