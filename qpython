@@ -24,3 +24,31 @@ print(result)
 
 # Close the connection
 q.close()
+================================================================================
+from qpython import qconnection
+from qpython.qtype import QSymbol
+
+# Connect to the Kdb+ instance
+q = qconnection.QConnection(host='localhost', port=5000)
+q.open()
+
+# Example data to match the non-temporal columns in the image
+gm = QSymbol('GM1')                             # Example symbol for 'gm'
+algoInstance = QSymbol('GADGETESY')             # Example symbol for 'algoInstance'
+algoTimeZone = QSymbol('Europe/Paris')          # Example timezone
+yRaw = 800.0                                    # Example raw value for 'yRaw'
+ySmoothed = 750.0                               # Example smoothed value for 'ySmoothed'
+windowMins = 10                                 # Example window size in minutes
+deltaDirection = 1                              # Example delta direction (1 for positive)
+deltaValue = 0.11                               # Example delta value
+
+# Insert the row into the table (ignoring date and time fields)
+q.sync('insert', 'yourTableName', 
+       [gm, algoInstance, algoTimeZone, yRaw, ySmoothed, windowMins, deltaDirection, deltaValue])
+
+# Confirm the data has been inserted by querying the table
+result = q.sendSync('select from yourTableName')
+print(result)
+
+# Close the connection
+q.close()
