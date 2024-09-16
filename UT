@@ -1,0 +1,82 @@
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import java.util.HashMap;
+import java.util.Map;
+
+public class NotifierModuleTest {
+
+    @InjectMocks
+    private NotifierModule notifierModule;  // Class under test
+
+    @Mock
+    private PlatformApi platformApi; // Mocked platform API
+
+    @Mock
+    private Map<NotifiableModuleName, Integer> channelIds; // Mocked channelId map
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);  // Initialize mocks
+    }
+
+    @Test
+    public void testNotify_ChannelIdNotFound() {
+        // Given
+        NotifiableModuleName moduleToNotify = mock(NotifiableModuleName.class);
+        String message = "test-message";
+
+        when(channelIds.containsKey(moduleToNotify)).thenReturn(false);
+
+        // When
+        boolean result = notifierModule.notify(moduleToNotify, message);
+
+        // Then
+        assertFalse(result);
+        verify(channelIds, times(1)).containsKey(moduleToNotify);
+    }
+
+    @Test
+    public void testNotify_ChannelIdFound() {
+        // Given
+        NotifiableModuleName moduleToNotify = mock(NotifiableModuleName.class);
+        String message = "test-message";
+
+        // Assuming Integer represents the channelId
+        when(channelIds.containsKey(moduleToNotify)).thenReturn(true);
+        when(channelIds.get(moduleToNotify)).thenReturn(1);  // Mock the channelId
+
+        // Mock the thread-local object retrieval
+        AlgoNotification notificationMock = mock(AlgoNotification.class);
+        ThreadLocal<AlgoNotification> threadLocal = ThreadLocal.withInitial(() -> notificationMock);
+        notificationMock.setData(message);
+
+        // When
+        boolean result = notifierModule.notify(moduleToNotify, message);
+
+        // Then
+        assertTrue(result);
+        verify(notificationMock, times(1)).setData(message);
+        // Further verify interactions like produceMessage call if needed
+    }
+
+    @Test
+    public void testRegister() {
+        // Given
+        when(platformApi.registerCustomModule(any(), any(), any())).thenReturn(null);
+
+        // When
+        notifierModule.register(platformApi);
+
+        // Then
+        verify(platformApi, times(1)).registerCustomModule(
+            eq(notifierModule), 
+            eq(Collections.emptyList()), 
+            anyList()
+        );
+    }
+}
