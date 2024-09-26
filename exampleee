@@ -21,3 +21,10 @@ Example Output (PotResponse):
   "pot": [100.5, 150.0, 200.25]
 }
 
+js sends an RFQ request to ALGO.
+ALGO computes the Hedging Calculation (HC).
+ALGO sends a POT request to POT to adjust the spread if needed.
+POT responds with the adjusted spread.
+If POT times out or errors, ALGO logs a warning in KDB and proceeds with the HC spread.
+ALGO streams the final prices back to js with either the adjusted or original HC spread.
+Note: The rows in red use gRPC with the protobuf format defined in the attached file.
