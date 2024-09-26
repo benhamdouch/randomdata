@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+message RfqData {
+  string rfq_id = 1;
+  float computed_dvo1 = 2;
+  int32 num_of_dealers = 3;
+  Way way = 4;
+  Tenor tenor_rfq_brut = 5;
+  string client_name = 6;
+  repeated float spread_to_mid = 7;
+}
+
+message RfqResponse {
+  string rfq_id = 1;
+  repeated float spread_to_mid = 2;
+  repeated float results = 3;
+}
+
+enum Way {
+  BUY = 0;
+  SELL = 1;
+}
+
+enum Tenor {
+  _2D = 0;
+  _1M = 1;
+  _3M = 2;
+  _6M = 3;
+  _9M = 4;
+  _1Y = 5;
+  _15M = 6;
+  _18M = 7;
+  _21M = 8;
+  _2Y = 9;
+  _3Y = 10;
+  _4Y = 11;
+  _5Y = 12;
+  _6Y = 13;
+  _7Y = 14;
+  _8Y = 15;
+  _9Y = 16;
+  _10Y = 17;
+  _11Y = 18;
+  _12Y = 19;
+  _13Y = 20;
+  _14Y = 21;
+  _15Y = 22;
+  _20Y = 23;
+  _25Y = 24;
+  _30Y = 25;
+}
