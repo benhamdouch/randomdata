@@ -1,0 +1,23 @@
+EXAMPLES 
+Example Input (PotRequest):
+
+{
+  "rfq_id": "RFQ123456",
+  "computed_dv01": 0.123,
+  "num_of_dealers": 5,
+  "way": "BUY",
+  "tenor_rfq_brut": "2Y",
+  "customer_firm": "CustomerA",
+  "sc_ricos": "Ricos123",
+  "spread_to_mid": [0.1, 0.2, 0.3]
+}
+
+
+Example Output (PotResponse):
+
+{
+  "rfq_id": "RFQ123456",
+  "spread_to_mid": [0.1, 0.2, 0.3],
+  "pot": [100.5, 150.0, 200.25]
+}
+
