@@ -1,11 +1,1 @@
-
-Creating UST configuration for USD Hedger.
-Interfacing with AMM UST Hedger (Defining input & output messages, Creating Solace publishers/consumers: Hedge Request + Execution Report).
-Processing incoming orders.
-Building and sending execution reports.
-Turning some hardcoded data into configuration parameters (available venues, entry points, etc.).
-Defining and implementing test scenarios.
-Creating UST specific Main class with useful modules & channels.
-Backport JUMP Marketdata analysis from UST Hedger to USD Hedger.
-Data capture.
-Start/stop and other scripts.
+c xdesc 0!select c:count i by date, minute, second from fysOutput where date=2024.01.31, sym like ("ALGO_5Y_FWDYIELD";"ALGO_5Y_FWDYIELD"), minute=13
